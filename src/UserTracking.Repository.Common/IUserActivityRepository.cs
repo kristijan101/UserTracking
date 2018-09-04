@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserTracking.Common;
 using UserTracking.Model;
@@ -19,7 +20,7 @@ namespace UserTracking.Repository.Common
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        Task<UserActivity> GetUserActivityAsync(string userId);
+        Task<UserActivity> GetUserActivityAsync(Guid userId);
 
         /// <summary>
         /// Asynchronously updates a user activity entry.

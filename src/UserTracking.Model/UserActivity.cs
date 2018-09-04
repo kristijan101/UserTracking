@@ -16,8 +16,6 @@ namespace UserTracking.Model
 
         public string UserName { get; set; }
 
-        public string UserId { get; set; }
-
         public int ViewCount { get; set; }
     }
 }

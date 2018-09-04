@@ -31,7 +31,7 @@ namespace UserTracking.Service.Services
                 throw new ArgumentNullException(nameof(userActivity));
             }
 
-            var existingUserActivityLog = await this.userActivityRepository.GetUserActivityAsync(userActivity.UserId);
+            var existingUserActivityLog = await this.userActivityRepository.GetUserActivityAsync(userActivity.Id);
             if (existingUserActivityLog != null)
             {
                 await UpdateActivity(userActivity, existingUserActivityLog);

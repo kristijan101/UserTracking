@@ -13,20 +13,25 @@ namespace UserTracking.Web.Filters
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var request = filterContext.HttpContext.Request;
-            var userActivity = new UserActivity()
-            {
-                IPAddress = request.UserHostAddress,
-                UserAgent = request.UserAgent
-            };
-
             if (request.IsAuthenticated)
             {
-                userActivity.UserId = filterContext.HttpContext.User.Identity.GetUserId();
-                userActivity.UserName = filterContext.HttpContext.User.Identity.Name;
+                LogUsersActivity();
             }
 
-            this.UserActivityLogger.WriteAsync(userActivity).Wait();
             base.OnActionExecuted(filterContext);
+
+            void LogUsersActivity()
+            {
+                var userActivity = new UserActivity()
+                {
+                    IPAddress = request.UserHostAddress,
+                    UserAgent = request.UserAgent,
+                    Id = Guid.Parse(filterContext.HttpContext.User.Identity.GetUserId()),
+                    UserName = filterContext.HttpContext.User.Identity.Name
+                };
+
+                this.UserActivityLogger.WriteAsync(userActivity).Wait();
+            }
         }
     }
 }
