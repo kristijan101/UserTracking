@@ -41,9 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IUserActivityLogger.cs" />
+    <Compile Include="IUserActivityLogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UserTracking.Common\UserTracking.Common.csproj">
+      <Project>{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}</Project>
+      <Name>UserTracking.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserTracking.Model\UserTracking.Model.csproj">
       <Project>{2D553996-38DF-40C8-BEF4-249BA89D6AD3}</Project>
       <Name>UserTracking.Model</Name>

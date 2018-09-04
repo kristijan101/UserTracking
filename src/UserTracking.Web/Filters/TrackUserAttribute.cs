@@ -10,7 +10,7 @@ namespace UserTracking.Web.Filters
     {
         public IUserActivityLogger UserActivityLogger { get; set; }
 
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var request = filterContext.HttpContext.Request;
             var userActivity = new UserActivity()
@@ -26,7 +26,7 @@ namespace UserTracking.Web.Filters
             }
 
             this.UserActivityLogger.LogAsync(userActivity).Wait();
-            base.OnActionExecuting(filterContext);
+            base.OnActionExecuted(filterContext);
         }
     }
 }
