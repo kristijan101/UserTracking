@@ -9,7 +9,7 @@ namespace UserTracking.Web.Models
         public string IPAddress { get; set; }
 
         [DisplayName("Last Activity")]
-        public DateTime ActivityDate { get; set; }
+        public string ActivityDate { get; set; }
 
         [DisplayName("User Agent")]
         public string UserAgent { get; set; }

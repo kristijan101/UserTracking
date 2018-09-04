@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UserTracking.Common;
 using UserTracking.Model;
 
@@ -12,6 +11,6 @@ namespace UserTracking.Service.Common
         /// </summary>
         /// <param name="pagination">Paging options.</param>
         /// <returns></returns>
-        Task<IEnumerable<UserActivity>> ReadAsync(Pagination pagination);
+        Task<PagedResult<UserActivity>> ReadAsync(Pagination pagination, SortingParameters orders, string user = "");
     }
 }

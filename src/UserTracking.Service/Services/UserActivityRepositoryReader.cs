@@ -26,9 +26,17 @@ namespace UserTracking.Service.Services
         /// </summary>
         /// <param name="pagination">Paging options.</param>
         /// <returns></returns>
-        public Task<IEnumerable<UserActivity>> ReadAsync(Pagination pagination)
+        public Task<PagedResult<UserActivity>> ReadAsync(Pagination pagination, SortingParameters orders, string user = "")
         {
-            return this.userActivityRepository.GetUserActivitiesAsync(pagination);
+            if (pagination == null)
+            {
+                throw new ArgumentNullException(nameof(pagination));
+            }
+            if (orders == null)
+            {
+                throw new ArgumentNullException(nameof(orders));
+            }
+            return this.userActivityRepository.GetUserActivitiesAsync(pagination, orders, user);
         }
     }
 }

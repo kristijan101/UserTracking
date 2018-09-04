@@ -13,7 +13,7 @@ namespace UserTracking.Repository.Common
         /// </summary>
         /// <param name="pagination">Paging options.</param>
         /// <returns></returns>
-        Task<IEnumerable<UserActivity>> GetUserActivitiesAsync(Pagination pagination);
+        Task<PagedResult<UserActivity>> GetUserActivitiesAsync(Pagination pagination, SortingParameters orders, string user = "");
 
         /// <summary>
         /// Asynchronously gets user activities for a user.

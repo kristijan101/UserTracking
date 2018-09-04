@@ -26,15 +26,31 @@ namespace UserTracking.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var activities = await this.userActivityLogReader.ReadAsync(new Pagination(1));
-            return View(activities.Select(a => new UserActivityViewModel()
+            return View();
+        }
+
+        public async Task<ActionResult> GetLogs()
+        {
+            var draw = Request.QueryString["draw"];
+            var start = Request.QueryString["start"];
+            var length = Request.QueryString["length"];
+            var orderBy = Request.QueryString[$"columns[{Request.QueryString["order[0][column]"]}][name]"];
+            var orderDirection = Request.QueryString["order[0][dir]"];
+            var searchUser = Request.QueryString["search[value]"];
+
+            var pageSize = string.IsNullOrEmpty(length) ? 0 : Convert.ToInt32(length);
+            var skipCount = string.IsNullOrEmpty(start) ? 1 : Convert.ToInt32(start);
+            var pageNumber = (skipCount % pageSize) + 1;
+            var result = await this.userActivityLogReader.ReadAsync(new Pagination(pageNumber, pageSize), new SortingParameters(new[] { new SortingPair(orderBy, orderDirection) }), searchUser);
+            var activities = result.Items.Select(a => new UserActivityViewModel()
             {
-                ActivityDate = a.ActivityDate,
+                ActivityDate = a.ActivityDate.ToString(),
                 IPAddress = a.IPAddress,
                 UserAgent = a.UserAgent,
                 UserName = a.UserName,
                 ViewCount = a.ViewCount
-            }));
+            });
+            return Json(new { draw = draw, recordsFiltered = result.TotalRecords, recordsTotal = result.TotalRecords, data = activities }, JsonRequestBehavior.AllowGet);
         }
     }
 }

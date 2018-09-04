@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using UserTracking.Common;
@@ -34,11 +35,29 @@ namespace UserTracking.Repository.Repositories
             }
         }
 
-        public async Task<IEnumerable<UserActivity>> GetUserActivitiesAsync(Pagination pagination)
+        public async Task<PagedResult<UserActivity>> GetUserActivitiesAsync(Pagination pagination, SortingParameters orders, string user = "")
         {
+            if(pagination == null)
+            {
+                throw new ArgumentNullException(nameof(pagination));
+            }
+            if(orders == null)
+            {
+                throw new ArgumentNullException(nameof(orders));
+            }
             using (var dbContext = CreateContext())
             {
                 IQueryable<UserActivityEntity> query = dbContext.Set<UserActivityEntity>().AsNoTracking();
+
+                var totalCount = await query.CountAsync().ConfigureAwait(false);
+
+                query = query.OrderBy(orders.GetSortExpression());
+
+                if (!string.IsNullOrEmpty(user))
+                {
+                    query = query.Where(a => a.UserName.Contains(user));
+                }
+
                 var skipCount = (pagination.PageNumber - 1) * pagination.PageSize;
                 if(skipCount > 0)
                 {
@@ -48,7 +67,7 @@ namespace UserTracking.Repository.Repositories
 
                 var entities = await query.ToListAsync().ConfigureAwait(false);
 
-                return entities.Select(e => CreateUserActivity(e));
+                return new PagedResult<UserActivity>() { TotalRecords = totalCount, Items = entities.Select(e => CreateUserActivity(e)) };
             }
         }
 

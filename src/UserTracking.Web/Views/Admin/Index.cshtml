@@ -1,54 +1,70 @@
-﻿@model IEnumerable<UserTracking.Web.Models.UserActivityViewModel>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Homepage views</h2>
 
-<table class="table">
+<table id="activity-list" class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                User
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ActivityDate)
+                Last Activity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IPAddress)
+                IP
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserAgent)
+                User Agent
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ViewCount)
+                Total Views
             </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.UserName
-                </td>
-                <td>
-                    @item.ActivityDate
-                </td>
-                <td>
-                    @item.IPAddress
-                </td>
-                <td>
-                    @item.UserAgent
-                </td>
-                <td>
-                    @item.ViewCount
-                </td>
-            </tr>
-
-        }
-    </tbody>
 
 
 </table>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jquerydatatables")
+    <script>
+        $(document).ready(function () {
+            $("#activity-list").DataTable({
+
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "pageLength": 10,
+
+                "ajax": {
+                    "url": "@Url.Action("GetLogs", "Admin", null, Request.Url.Scheme)",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "columnDefs":
+                    [{
+                        "targets": [2,3],
+                        "visible": true,
+                        "searchable": false,
+                        "orderable": false
+                    }],
+
+                "columns": [
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    { "data": "ActivityDate", "name": "ActivityDate", "autoWidth": true },
+                    { "data": "IPAddress", "title": "IPAddress", "name": "ContactName", "autoWidth": true },
+                    { "data": "UserAgent", "name": "UserAgent", "autoWidth": true },
+                    { "data": "ViewCount", "name": "ViewCount", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+
+}
