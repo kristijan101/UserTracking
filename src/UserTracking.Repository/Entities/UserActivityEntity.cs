@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace UserTracking.Model
+namespace UserTracking.Repository.Entities
 {
-    public class UserActivity
+    public class UserActivityEntity
     {
         public Guid Id { get; set; }
 

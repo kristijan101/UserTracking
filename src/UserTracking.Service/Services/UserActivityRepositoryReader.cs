@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UserTracking.Common;
 using UserTracking.Model;
 using UserTracking.Repository.Common;
 using UserTracking.Service.Common;
 
-namespace UserTracking.Service
+namespace UserTracking.Service.Services
 {
     public class UserActivityRepositoryReader : IUserActivityLogReader
     {
@@ -30,7 +28,7 @@ namespace UserTracking.Service
         /// <returns></returns>
         public Task<IEnumerable<UserActivity>> ReadAsync(Pagination pagination)
         {
-            return this.userActivityRepository.GetUserActivities(pagination);
+            return this.userActivityRepository.GetUserActivitiesAsync(pagination);
         }
     }
 }

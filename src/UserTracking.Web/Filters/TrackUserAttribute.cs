@@ -25,7 +25,7 @@ namespace UserTracking.Web.Filters
                 userActivity.UserName = filterContext.HttpContext.User.Identity.Name;
             }
 
-            this.UserActivityLogger.LogAsync(userActivity).Wait();
+            this.UserActivityLogger.WriteAsync(userActivity).Wait();
             base.OnActionExecuted(filterContext);
         }
     }

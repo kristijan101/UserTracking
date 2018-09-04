@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using UserTracking.Service.Common;
+using UserTracking.Service.Services;
 
 namespace UserTracking.Service.Infrastructure
 {
@@ -8,7 +9,7 @@ namespace UserTracking.Service.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserActivityRepositoryReader>().As<IUserActivityLogReader>();
-            builder.RegisterType<OnePersistedEntryPerUserLogger>().As<IUserActivityLogger>();
+            builder.RegisterType<OneEntryPerUserLogger>().As<IUserActivityLogger>();
         }
     }
 }

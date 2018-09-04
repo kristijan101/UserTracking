@@ -12,14 +12,14 @@ namespace UserTracking.Repository.Common
         /// </summary>
         /// <param name="pagination">Paging options.</param>
         /// <returns></returns>
-        Task<IEnumerable<UserActivity>> GetUserActivities(Pagination pagination);
+        Task<IEnumerable<UserActivity>> GetUserActivitiesAsync(Pagination pagination);
 
         /// <summary>
         /// Asynchronously gets user activities for a user.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        Task<IEnumerable<UserActivity>> GetUserActivities(string userId);
+        Task<UserActivity> GetUserActivityAsync(string userId);
 
         /// <summary>
         /// Asynchronously updates a user activity entry.

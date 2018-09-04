@@ -1,4 +1,7 @@
 ﻿using Autofac;
+using UserTracking.Repository.Common;
+using UserTracking.Repository.EntityFramework;
+using UserTracking.Repository.Repositories;
 
 namespace UserTracking.Repository.Infrastructure
 {
@@ -6,7 +9,8 @@ namespace UserTracking.Repository.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+            builder.RegisterType<EFUserActivityRepository>().As<IUserActivityRepository>();
+            builder.RegisterType<UserTrackingContext>().AsSelf();
         }
     }
 }

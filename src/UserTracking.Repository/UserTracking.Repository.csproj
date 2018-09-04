@@ -33,7 +33,14 @@
     <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,11 +50,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\UserActivityEntity.cs" />
+    <Compile Include="EntityFramework\Mappings\UserActivityEntityMap.cs" />
+    <Compile Include="EntityFramework\UserTrackingContext.cs" />
     <Compile Include="Infrastructure\RepositoryDIModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EFUserActivityRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserTracking.Common\UserTracking.Common.csproj">
+      <Project>{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}</Project>
+      <Name>UserTracking.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserTracking.Model\UserTracking.Model.csproj">
+      <Project>{2D553996-38DF-40C8-BEF4-249BA89D6AD3}</Project>
+      <Name>UserTracking.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserTracking.Repository.Common\UserTracking.Repository.Common.csproj">
+      <Project>{F6B1D92F-C18E-4878-903A-691106FEC6E7}</Project>
+      <Name>UserTracking.Repository.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

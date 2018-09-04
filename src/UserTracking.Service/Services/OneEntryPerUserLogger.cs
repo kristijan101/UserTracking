@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using UserTracking.Model;
 using UserTracking.Repository.Common;
 using UserTracking.Service.Common;
 
-namespace UserTracking.Service
+namespace UserTracking.Service.Services
 {
-    public class OnePersistedEntryPerUserLogger : IUserActivityLogger
+    public class OneEntryPerUserLogger : IUserActivityLogger
     {
         private readonly IUserActivityRepository userActivityRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OnePersistedEntryPerUserLogger"/> class.
+        /// Initializes a new instance of the <see cref="OneEntryPerUserLogger"/> class.
         /// </summary>
         /// <param name="userActivityRepository">The user activity repository.</param>
-        public OnePersistedEntryPerUserLogger(IUserActivityRepository userActivityRepository)
+        public OneEntryPerUserLogger(IUserActivityRepository userActivityRepository)
         {
             this.userActivityRepository = userActivityRepository ?? throw new ArgumentNullException(nameof(userActivityRepository));
         }
@@ -25,17 +24,17 @@ namespace UserTracking.Service
         /// </summary>
         /// <param name="userActivity">The user activity to log.</param>
         /// <returns></returns>
-        public async Task LogAsync(UserActivity userActivity)
+        public async Task WriteAsync(UserActivity userActivity)
         {
             if(userActivity == null)
             {
                 throw new ArgumentNullException(nameof(userActivity));
             }
 
-            var userActivities = await this.userActivityRepository.GetUserActivities(userActivity.UserId);
-            if (userActivities.Any())
+            var existingUserActivityLog = await this.userActivityRepository.GetUserActivityAsync(userActivity.UserId);
+            if (existingUserActivityLog != null)
             {
-                await UpdateActivity(userActivity, userActivities.First());
+                await UpdateActivity(userActivity, existingUserActivityLog);
             }
             else
             {
@@ -48,6 +47,7 @@ namespace UserTracking.Service
             var utcNow = DateTime.UtcNow;
             userActivity.ActivityDate = utcNow;
             userActivity.DateCreated = utcNow;
+            userActivity.ViewCount = 1;
             await this.userActivityRepository.CreateAsync(userActivity);
         }
 
@@ -56,6 +56,7 @@ namespace UserTracking.Service
             targetActivity.ActivityDate = DateTime.UtcNow;
             targetActivity.IPAddress = sourceActivity.IPAddress;
             targetActivity.UserAgent = sourceActivity.UserAgent;
+            targetActivity.ViewCount = sourceActivity.ViewCount + 1;
             await this.userActivityRepository.UpdateAsync(targetActivity);
         }
     }

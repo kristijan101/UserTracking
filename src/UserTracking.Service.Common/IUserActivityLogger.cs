@@ -10,6 +10,6 @@ namespace UserTracking.Service.Common
         /// </summary>
         /// <param name="userActivity">The user activity.</param>
         /// <returns></returns>
-        Task LogAsync(UserActivity userActivity);
+        Task WriteAsync(UserActivity userActivity);
     }
 }
