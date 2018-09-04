@@ -30,7 +30,7 @@ namespace UserTracking.Repository.Repositories
             using (var dbContext = CreateContext())
             {
                 dbContext.Set<UserActivityEntity>().Add(userActivityEntity);
-                await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
 
@@ -46,7 +46,7 @@ namespace UserTracking.Repository.Repositories
                 }
                 query = query.Take(pagination.PageSize);
 
-                var entities = await query.ToListAsync();
+                var entities = await query.ToListAsync().ConfigureAwait(false);
 
                 return entities.Select(e => CreateUserActivity(e));
             }
@@ -56,8 +56,8 @@ namespace UserTracking.Repository.Repositories
         {
             using (var dbContext = CreateContext())
             {
-                var entity = await dbContext.Set<UserActivityEntity>().FindAsync(userId);
-                return CreateUserActivity(entity);
+                var entity = await dbContext.Set<UserActivityEntity>().FindAsync(userId).ConfigureAwait(false);
+                return entity != null ? CreateUserActivity(entity) : null;
             }
         }
 
@@ -65,7 +65,7 @@ namespace UserTracking.Repository.Repositories
         {
             using (var dbContext = CreateContext())
             {
-                var entity = await dbContext.Set<UserActivityEntity>().FindAsync(userActivity.Id);
+                var entity = await dbContext.Set<UserActivityEntity>().FindAsync(userActivity.Id).ConfigureAwait(false);
                 entity.ActivityDate = userActivity.ActivityDate;
                 entity.IPAddress = userActivity.IPAddress;
                 entity.UserAgent = userActivity.UserAgent;

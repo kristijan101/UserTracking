@@ -31,14 +31,14 @@ namespace UserTracking.Service.Services
                 throw new ArgumentNullException(nameof(userActivity));
             }
 
-            var existingUserActivityLog = await this.userActivityRepository.GetUserActivityAsync(userActivity.Id);
+            var existingUserActivityLog = await this.userActivityRepository.GetUserActivityAsync(userActivity.Id).ConfigureAwait(false);
             if (existingUserActivityLog != null)
             {
-                await UpdateActivity(userActivity, existingUserActivityLog);
+                await UpdateActivity(userActivity, existingUserActivityLog).ConfigureAwait(false);
             }
             else
             {
-                await CreateActivity(userActivity);
+                await CreateActivity(userActivity).ConfigureAwait(false);
             }
         }
 
@@ -48,16 +48,16 @@ namespace UserTracking.Service.Services
             userActivity.ActivityDate = utcNow;
             userActivity.DateCreated = utcNow;
             userActivity.ViewCount = 1;
-            await this.userActivityRepository.CreateAsync(userActivity);
+            await this.userActivityRepository.CreateAsync(userActivity).ConfigureAwait(false);
         }
 
-        private async Task UpdateActivity(UserActivity sourceActivity, UserActivity targetActivity)
+        private async Task UpdateActivity(UserActivity newActivity, UserActivity existingActivity)
         {
-            targetActivity.ActivityDate = DateTime.UtcNow;
-            targetActivity.IPAddress = sourceActivity.IPAddress;
-            targetActivity.UserAgent = sourceActivity.UserAgent;
-            targetActivity.ViewCount = sourceActivity.ViewCount + 1;
-            await this.userActivityRepository.UpdateAsync(targetActivity);
+            existingActivity.ActivityDate = DateTime.UtcNow;
+            existingActivity.IPAddress = newActivity.IPAddress;
+            existingActivity.UserAgent = newActivity.UserAgent;
+            existingActivity.ViewCount++;
+            await this.userActivityRepository.UpdateAsync(existingActivity).ConfigureAwait(false);
         }
     }
 }

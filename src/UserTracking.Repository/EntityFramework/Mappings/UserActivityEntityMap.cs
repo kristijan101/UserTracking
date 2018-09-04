@@ -7,6 +7,8 @@ namespace UserTracking.Repository.EntityFramework.Mappings
     {
         public UserActivityEntityMap()
         {
+            ToTable("UserActivity");
+
             HasKey(p => p.Id);
 
             Property(p => p.UserAgent)
