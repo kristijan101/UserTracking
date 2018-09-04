@@ -1,0 +1,54 @@
+﻿@model IEnumerable<UserTracking.Web.Models.UserActivityViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IPAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAgent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewCount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.ActivityDate
+                </td>
+                <td>
+                    @item.IPAddress
+                </td>
+                <td>
+                    @item.UserAgent
+                </td>
+                <td>
+                    @item.ViewCount
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>

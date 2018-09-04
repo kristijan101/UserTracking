@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using UserTracking.Common;
 using UserTracking.Service.Common;
+using UserTracking.Web.Models;
 
 namespace UserTracking.Web.Controllers
 {
@@ -21,14 +24,17 @@ namespace UserTracking.Web.Controllers
             this.userActivityLogReader = userActivityLogReader ?? throw new ArgumentNullException(nameof(userActivityLogReader));
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
-        }
-
-        public class UserActivityViewModel
-        {
-
+            var activities = await this.userActivityLogReader.ReadAsync(new Pagination(1));
+            return View(activities.Select(a => new UserActivityViewModel()
+            {
+                ActivityDate = a.ActivityDate,
+                IPAddress = a.IPAddress,
+                UserAgent = a.UserAgent,
+                UserName = a.UserName,
+                ViewCount = a.ViewCount
+            }));
         }
     }
 }
