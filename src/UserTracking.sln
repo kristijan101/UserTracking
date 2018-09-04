@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Repository.Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Model", "UserTracking.Model\UserTracking.Model.csproj", "{2D553996-38DF-40C8-BEF4-249BA89D6AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Model.Common", "UserTracking.Model.Common\UserTracking.Model.Common.csproj", "{86DD92F6-4E99-4C37-8F3E-CEF5CA8C94E7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Service", "UserTracking.Service\UserTracking.Service.csproj", "{8C23D9C4-9310-4543-B20A-5E990582A2C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Service.Common", "UserTracking.Service.Common\UserTracking.Service.Common.csproj", "{7D16C5C3-5E70-43CA-8A0F-492AA4317310}"
@@ -41,10 +39,6 @@ Global
 		{2D553996-38DF-40C8-BEF4-249BA89D6AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D553996-38DF-40C8-BEF4-249BA89D6AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D553996-38DF-40C8-BEF4-249BA89D6AD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86DD92F6-4E99-4C37-8F3E-CEF5CA8C94E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86DD92F6-4E99-4C37-8F3E-CEF5CA8C94E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86DD92F6-4E99-4C37-8F3E-CEF5CA8C94E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86DD92F6-4E99-4C37-8F3E-CEF5CA8C94E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C23D9C4-9310-4543-B20A-5E990582A2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C23D9C4-9310-4543-B20A-5E990582A2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C23D9C4-9310-4543-B20A-5E990582A2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
