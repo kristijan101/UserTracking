@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Service", "Use
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Service.Common", "UserTracking.Service.Common\UserTracking.Service.Common.csproj", "{7D16C5C3-5E70-43CA-8A0F-492AA4317310}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracking.Common", "UserTracking.Common\UserTracking.Common.csproj", "{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{7D16C5C3-5E70-43CA-8A0F-492AA4317310}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D16C5C3-5E70-43CA-8A0F-492AA4317310}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D16C5C3-5E70-43CA-8A0F-492AA4317310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AFD0954-D22F-4F9F-9F82-44DFBFE830FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

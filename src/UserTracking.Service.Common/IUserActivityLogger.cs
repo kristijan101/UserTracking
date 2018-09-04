@@ -6,7 +6,7 @@ namespace UserTracking.Service.Common
     public interface IUserActivityLogger
     {
         /// <summary>
-        /// Asynchronously adds or updates activity for a user.
+        /// Asynchronously logs activity for a user.
         /// </summary>
         /// <param name="userActivity">The user activity.</param>
         /// <returns></returns>
