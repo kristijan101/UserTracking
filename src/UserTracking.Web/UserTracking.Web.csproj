@@ -302,9 +302,17 @@
       <Project>{2d553996-38df-40c8-bef4-249ba89d6ad3}</Project>
       <Name>UserTracking.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserTracking.Repository\UserTracking.Repository.csproj">
+      <Project>{76F04A61-A512-4974-8A50-C57B547712DF}</Project>
+      <Name>UserTracking.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserTracking.Service.Common\UserTracking.Service.Common.csproj">
       <Project>{7d16c5c3-5e70-43ca-8a0f-492aa4317310}</Project>
       <Name>UserTracking.Service.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserTracking.Service\UserTracking.Service.csproj">
+      <Project>{8C23D9C4-9310-4543-B20A-5E990582A2C2}</Project>
+      <Name>UserTracking.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

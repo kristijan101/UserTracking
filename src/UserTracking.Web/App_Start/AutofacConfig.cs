@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using System.Web.Mvc;
+using UserTracking.Repository.Infrastructure;
+using UserTracking.Service.Infrastructure;
 
 namespace UserTracking.Web.App_Start
 {
@@ -11,6 +13,10 @@ namespace UserTracking.Web.App_Start
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.RegisterModule<RepositoryDIModule>();
+            builder.RegisterModule<ServiceDIModule>();
+
             builder.RegisterFilterProvider();
 
             var container = builder.Build();
