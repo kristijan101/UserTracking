@@ -40,7 +40,7 @@ namespace UserTracking.Web.Controllers
 
             var pageSize = string.IsNullOrEmpty(length) ? 0 : Convert.ToInt32(length);
             var skipCount = string.IsNullOrEmpty(start) ? 1 : Convert.ToInt32(start);
-            var pageNumber = (skipCount % pageSize) + 1;
+            var pageNumber = (skipCount / pageSize) + 1;
             var result = await this.userActivityLogReader.ReadAsync(new Pagination(pageNumber, pageSize), new SortingParameters(new[] { new SortingPair(orderBy, orderDirection) }), searchUser);
             var activities = result.Items.Select(a => new UserActivityViewModel()
             {
